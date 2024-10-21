@@ -1,58 +1,46 @@
+# Krakjn's Rigging
+As someone who deals with build systems all day, a declarative approach to my entire setup is what I gravitate to. Naturally, I fell in love with `nix`. The expressiveness, the control, I can never go back. KDE is too good to ignore, but Hyprland is my daily drive. 
 
-<div align="center">
-<br> 
-  <a href="#-announcement-"><kbd> <br> Read this First <br> </kbd></a>&ensp;&ensp;
-  <a href="#-1-using-auto-install-script"><kbd> <br> Auto Install <br> </kbd></a>&ensp;&ensp;
-  <a href="#-2-manual"><kbd> <br> Manual Install <br> </kbd></a>&ensp;&ensp;
-  <a href="#-reverting-back-to-your-default-configs"><kbd> <br> Reverting to your previous config <br> </kbd></a>&ensp;&ensp;
- </div><br>
+## 🔧 Components
 
-<div align="center">
+| Component             | Version/Name                |
+|-----------------------|-----------------------------|
+| Distro                | NixOS                       |
+| Kernel                | LTS                         |
+| Shell                 | Zsh                         |
+| Display Server        | Wayland                     |
+| WM (Compositor)       | Hyprland                    |
+| Bar                   | Waybar                      |
+| Notification          | Dunst                       |
+| Launcher              | Rofi-Wayland                |
+| Editor                | Neovim, Helix, Codium       |
+| Terminal              | Kitty + Starship            |
+| OSD                   | Avizo                       |
+| Night Gamma           | Wlsunset                    |
+| Fetch Utility         | Neofetch                    |
+| Theme                 | Catppuccin Macchiato        |
+| Icons                 | Colloid-teal-dark, Numix-Circle |
+| Font                  | Hack Nerd Font              |
+| Player                | Spotify                     |
+| File Browser          | Thunar + Yazi               |
+| Internet Browser      | Vivaldi, Firefox            |
+<!-- | Mimetypes             | MPV, Imv, Zathura           | -->
+<!-- | Image Editor          | Swappy                      | -->
+| Screenshot            | Grim + Slurp                |
+| Recorder              | Wl-screenrec                |
+| Color Picker          | Hyprpicker                  |
+| Clipboard             | Wl-clipboard + Cliphist + Wl-clip-persist    |
+| Idle                  | Hypridle                    |
+| Lock                  | Hyprlock                    |
+| Logout menu           | Wlogout                     |
+| Wallpaper             | Hyprpaper                   |
+| Graphical Boot        | Plymouth + Catppuccin-plymouth |
+| Display Manager       | Greetd + Tuigreet           |
+| Containerization      | Podman                      |
 
-## 💌 ** JaKooLit's ❄️ NixOS-Hyprland Install Script ** 💌
-
-![GitHub Repo stars](https://img.shields.io/github/stars/JaKooLit/NixOS-Hyprland?style=for-the-badge&color=cba6f7) ![GitHub last commit](https://img.shields.io/github/last-commit/JaKooLit/NixOS-Hyprland?style=for-the-badge&color=b4befe) ![GitHub repo size](https://img.shields.io/github/repo-size/JaKooLit/NixOS-Hyprland?style=for-the-badge&color=cba6f7) <a href="https://discord.gg/9JEgZsfhex"> <img src="https://img.shields.io/discord/1151869464405606400?style=for-the-badge&logo=discord&color=cba6f7&link=https%3A%2F%2Fdiscord.gg%9JEgZsfhex"> </a>
-
-
-<br/>
-</div>
-
-
-<div align="center">
-👇 KOOL's Hyprland-Dots related Links 👇
-<br/>
-</div>
-<div align="center">
-<br>
-  <a href="https://github.com/JaKooLit/Hyprland-Dots"><kbd> <br> Hyprland-Dots repo <br> </kbd></a>&ensp;&ensp;
-  <a href="https://www.youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx"><kbd> <br> Youtube <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/JaKooLit/Hyprland-Dots/wiki"><kbd> <br> Wiki <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/JaKooLit/Hyprland-Dots/wiki/Keybinds"><kbd> <br> Keybinds <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/JaKooLit/Hyprland-Dots/wiki/FAQ"><kbd> <br> FAQ <br> </kbd></a>&ensp;&ensp;
-  <a href="https://discord.gg/9JEgZsfhex"><kbd> <br> Discord <br> </kbd></a>
-</div><br>
-
-<h3 align="center">
-	<img src="https://github.com/JaKooLit/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-	KooL Hyprland-Dotfiles Showcase 
-	<img src="https://github.com/JaKooLit/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-</h3>
-
-<div align="center">
-
-https://github.com/JaKooLit/Hyprland-Dots/assets/85185940/50d53755-0f11-45d6-9913-76039e84a2cd
-
-</div>
-
-> [!CAUTION]
-> This is not purely written in Nix-Language. You should check ZaneyOS. Link below
-
-
-> [!NOTE]
-> hyprland to be installed will be from development branch or known as -git version
 
 #### 🪧🪧🪧 ANNOUNCEMENT 🪧🪧🪧
-- This Repo does not contain Hyprland Dots or configs! Nor Configs are NOT written in Nix. Hyprland Dotfiles will be downloaded from [`KooL's Hyprland-Dots`](https://github.com/JaKooLit/Hyprland-Dots) . 
+- This Repo does not contain Hyprland Dots or configs! Configs are NOT written in Nix. Hyprland Dotfiles will be downloaded from [`KooL's Hyprland-Dots`](https://github.com/JaKooLit/Hyprland-Dots) . 
 
 - Hyprland-Dots use are constantly evolving / improving. you can check CHANGELOGS here [`Hyprland-Dots-Changelogs`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Changelogs) 
 
@@ -86,43 +74,21 @@ https://github.com/JaKooLit/Hyprland-Dots/assets/85185940/50d53755-0f11-45d6-991
 - If you have a question about KooL's Hyprland dots, see [`KooL's Dots WIKI`](https://github.com/JaKooLit/Hyprland-Dots/wiki) . In that wiki are some tips, keybinds, some collective FAQ etc.
 
 
-### ⬇️ Installations
-#### 📽 Youtube video for using this script
-- [KooL's Hyprland Dots on NixOS](https://youtu.be/nJLnRgnLPWI)
+### ⬇️ Installation
 
-#### 📜 1. Using auto install Script:
-- This is the easiest and recommended way of starting out. 
-- This script is NOT meant to allow you to change every option that you can in the flake or help you install extra packages. It is simply here so you can get my configuration installed with as little chances of breakages and then fiddle to your hearts content!
-- Simply copy this and run it:
+- Run this command to ensure git, curl, vim & pciutils (pciutils for nvidia) are installed: Note: or nano if you prefer nano for editing
 ```
+git clone --depth 1 https://github.com/krakjn/rigging.git ~/rigging
+cd ~/rigging
 nix-shell -p git vim curl pciutils
-sh <(curl -L https://github.com/JaKooLit/NixOS-Hyprland/raw/main/auto-install.sh)
+./install.sh
 ```
-> [!NOTE]
-> pciutils is necessary to detect if you have nvidia card. 
 
-
-
-#### 🦽 2. Manual:
-<details>
-<summary align=center>Click here 👉🏻 Manual Installation</summary>
-
-- Run this command to ensure git, curl, vim & pciutils are installed: Note: or nano if you prefer nano for editing
-```
-nix-shell -p git vim curl pciutils
-```
-- Clone this repo & CD into it:
-```
-git clone --depth 1 https://github.com/JaKooLit/NixOS-Hyprland.git ~/NixOS-Hyprland
-cd ~/NixOS-Hyprland
-```
-- *You should stay in this folder for the rest of the install*
-- Create the host folder for your machine(s)
-```
-cp -r hosts/default hosts/<your-desired-hostname>
-```
+#### Installation Details
+- This script will copy `hosts/default` into `hosts/<hostname>` with your prompt answers. 
+- If modification is needed, change `hosts/default/*` files
 - Edit as required the `config.nix` in `hosts/<your-desired-hostname>/`
-- Generate your hardware.nix like so:
+- To generate `hardware.nix` run the following:
 ```
 sudo nixos-generate-config --show-hardware-config > hosts/<your-desired-hostname>/hardware.nix
 ```
@@ -132,36 +98,7 @@ NIX_CONFIG="experimental-features = nix-command flakes"
 sudo nixos-rebuild switch --flake .#hostname
 ```
 
-Once done, you can install the GTK Themes and Hyprland-Dots. Links are above
-
-</details>
-
-#### 👉🏻 3. Alternative
-- auto install by running `./install.sh` after cloning and CD into NixOS-Hyprland
-> [!NOTE]
-> install.sh is a stripped version of auto-install.sh as it will not re-download repo
-
-
-- Run this command to ensure git, curl, vim & pciutils are installed: Note: or nano if you prefer nano for editing
-```
-nix-shell -p git curl pciutils
-```
-
-- Clone this repo into your home directory & CD into it:
-```
-git clone --depth 1 https://github.com/JaKooLit/NixOS-Hyprland.git ~/NixOS-Hyprland
-cd ~/NixOS-Hyprland
-```
-
-> [!IMPORTANT]
-> need to download in your home folder as some part of the installer are going back again to ~/NixOS-Hyprland
-
-- *You should stay in this folder for the rest of the install*
-- edit `hosts/default/config.nix` to your liking. Once you are satisfied, ran `./install.sh`
-
-
-
-Now when you want to rebuild the configuration you have access to an alias called flake-rebuild that will rebuild the flake!
+> Now when you want to rebuild the configuration you have access to an alias called flake-rebuild that will rebuild the flake!
 
 Hope you enjoy! 🎉
 
@@ -189,33 +126,7 @@ Hope you enjoy! 🎉
 - ⚠️ just remember to clean up your nix/store to remove unnessary garbage from your system `sudo nix-collect-garbage -d`
 - OR, simply just revert into your previous snapshot of your system by choosing which snapshot to boot via your bootloaders.
 
-#### 📒 Final Notes
-- join my discord channel [`Discord`](https://discord.com/invite/9JEgZsfhex)
-- Feel free to copy, re-distribute, and use this script however you want. Would appreciate if you give me some loves by crediting my work :)
-
-#### ⏩ Contributing
-- As stated above, these script does not contain actual config files. These are only the installer of packages
-- If you want to contribute and/or test the Hyprland-Dotfiles (development branch), [`Hyprland-Dots-Development`](https://github.com/JaKooLit/Hyprland-Dots/tree/development) 
-
-
 #### 👍👍👍 Thanks and Credits!
 - [`Hyprland`](https://hyprland.org/) Of course to Hyprland and @vaxerski for this awesome Dynamic Tiling Manager.
 - [`ZaneyOS`](https://gitlab.com/Zaney/zaneyos) - template including auto installation script and idea. ZaneyOS is a NixOS-Hyprland with home-manager. Written in pure nix language
-
-## 💖 Support
-- a Star on my Github repos would be nice 🌟
-
-- Subscribe to my Youtube Channel [YouTube](https://www.youtube.com/@Ja.KooLit) 
-
-- You can also buy me Coffee Through ko-fi.com or Coffee.com 🤩
-
-<a href='https://ko-fi.com/jakoolit' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/JaKooLit)
-
-####  📹 Youtube videos (Click to view and watch the playlist) 📹
-[![Youtube Playlist Thumbnail](https://raw.githubusercontent.com/JaKooLit/screenshots/main/Youtube.png)](https://youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx&si=iaNjLulFdsZ6AV-t)
-
-
-## 🥰🥰 💖💖 👍👍👍
-[![Stargazers over time](https://starchart.cc/JaKooLit/NixOS-Hyprland.svg?variant=adaptive)](https://starchart.cc/JaKooLit/NixOS-Hyprland)
+- [`JaKooLit`](https://github.com/JaKooLit) For my springboard into this world.

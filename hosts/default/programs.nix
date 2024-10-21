@@ -15,8 +15,6 @@ in
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = (with pkgs; [
-    # cliphist
-    # ranger
     # macchina #neofetch alternative in rust
     # mcfly # terminal history
     # skim #fzf better alternative in rust
@@ -35,6 +33,7 @@ in
     cava
     chafa
     clang
+    # cliphist
     cmake
     cmatrix
     cool-retro-term
@@ -113,6 +112,7 @@ in
     qt6.qtwayland
     qt6Packages.qtstyleplugin-kvantum #kvantum
     qt6ct
+    # ranger
     rewrk
     ripgrep
     rofi-wayland

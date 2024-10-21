@@ -16,8 +16,8 @@
     inputs@{ nixpkgs, ... }:
     let
       system = "x86_64-linux";
-      host = "HOSTNAME";
-      username = "USERNAME";
+      host = "daedalus";
+      username = "tony";
       pkgs = import nixpkgs {
         inherit system;
         config = {
