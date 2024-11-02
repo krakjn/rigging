@@ -25,12 +25,13 @@ in {
               ms-python.python
               rust-lang.rust-analyzer
               ms-azuretools.vscode-docker
-            ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-              name = "everforest";
-              publisher = "sainnhe";
-              version = "0.3.0";
-              sha256 = "9d98abcd5bccd7ad194e904b4e298bd97df9b081b2e63d8b40ea24edad9873b5";
-            }];
+            ];
+	    # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+	    #          name = "everforest";
+	    #          publisher = "sainnhe";
+	    #          version = "0.3.0";
+	    #          sha256 = "9d98abcd5bccd7ad194e904b4e298bd97df9b081b2e63d8b40ea24edad9873b5";
+	    #        }];
         })
       ];
     };

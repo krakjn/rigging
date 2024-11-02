@@ -54,6 +54,7 @@
       servers = {
         rust_analyzer = {
           enable = true;
+          settings = { inlayHints = { enable = false; }; };
           installCargo = false;
           installRustc = false;
         };
