@@ -8,3 +8,5 @@ clean hostname:
   # sudo nixos-rebuild boot --flake .#{{hostname}} --update-input nixpkgs --update-input rust-overlay --commit-lock-file --upgrade --impure
   sudo nixos-rebuild boot --flake .#{{hostname}} --update-input nixpkgs --commit-lock-file --upgrade --impure
 
+build-boot hostname:
+  sudo nixos-rebuild boot --flake .#{{hostname}} --update-input nixpkgs --commit-lock-file --upgrade --impure

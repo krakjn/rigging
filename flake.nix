@@ -12,23 +12,17 @@
     };
   };
 
-  outputs =
-    inputs@{ nixpkgs, ... }:
+  outputs = inputs@{ nixpkgs, ... }:
     let
       system = "x86_64-linux";
       host = "daedalus";
       username = "tony";
       pkgs = import nixpkgs {
         inherit system;
-        config = {
-          allowUnfree = true;
-        };
+        config = { allowUnfree = true; };
       };
-    in
-    {
-      formatter = {
-        x86_64-linux = pkgs.nixpkgs-fmt;
-      };
+    in {
+      formatter = { x86_64-linux = pkgs.nixpkgs-fmt; };
       nixosConfigurations = {
         "${host}" = nixpkgs.lib.nixosSystem rec {
           specialArgs = {

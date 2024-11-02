@@ -1,16 +1,12 @@
-
 { pkgs, ... }:
 let
   inherit (import ./variables.nix) keyboardLayout;
-  python-packages = pkgs.python3.withPackages (
-    ps:
-      with ps; [
-        requests
-        pyquery # needed for hyprland-dots Weather script
-      ]
-  );
-in
-{
+  python-packages = pkgs.python3.withPackages (ps:
+    with ps; [
+      requests
+      pyquery # needed for hyprland-dots Weather script
+    ]);
+in {
 
   nixpkgs.config.allowUnfree = true;
 
@@ -54,14 +50,14 @@ in
     gcc14
     git
     git-ignore
-    glib #for gsettings to work
+    glib # for gsettings to work
     gnome-system-monitor
     gnumake
     go
     gping
     grim
     gsettings-qt
-    gtk-engine-murrine #for gtk themes
+    gtk-engine-murrine # for gtk themes
     helix
     hyprcursor # requires unstable channel
     hypridle # requires unstable channel
@@ -78,7 +74,7 @@ in
     lazygit
     libappindicator
     libnotify
-    libsForQt5.qtstyleplugin-kvantum #kvantum
+    libsForQt5.qtstyleplugin-kvantum # kvantum
     license-generator
     lsd
     lsof
@@ -86,16 +82,18 @@ in
     mdcat
     mold
     monolith
+    mosquitto
     mpv
     mpvpaper
     networkmanagerapplet
+    nixfmt
     nodePackages_latest.nodejs
     nodePackages_latest.pnpm
     noti
     numbat
     nvtopPackages.full
     nwg-look # requires unstable channel
-    openssl #required by Rainbow borders
+    openssl # required by Rainbow borders
     ouch
     pamixer
     pandoc
@@ -108,9 +106,9 @@ in
     procs
     progress
     pyprland
-    qt5ct
+    # qt5ct
     qt6.qtwayland
-    qt6Packages.qtstyleplugin-kvantum #kvantum
+    qt6Packages.qtstyleplugin-kvantum # kvantum
     qt6ct
     # ranger
     rewrk
@@ -151,9 +149,7 @@ in
 
     #waybar  # if wanted experimental next line
     #(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
-  ]) ++ [
-    python-packages
-  ];
+  ]) ++ [ python-packages ];
 
   programs = {
     hyprland = {
@@ -168,15 +164,9 @@ in
     hyprlock.enable = true;
     nm-applet.indicator = true;
 
-    thunar.enable = true;# FIXME: go to dolphin
+    thunar.enable = true; # FIXME: go to dolphin
     waybar.enable = true;
-    thunar.plugins = with pkgs.xfce; [
-      exo
-      mousepad
-      thunar-archive-plugin
-      thunar-volman
-      tumbler
-    ];
+    thunar.plugins = with pkgs.xfce; [ exo mousepad thunar-archive-plugin thunar-volman tumbler ];
 
     virt-manager.enable = false;
 

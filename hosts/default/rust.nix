@@ -2,14 +2,12 @@
 
 {
   # Apply the overlay to the package set
-  nixpkgs.overlays = [
-    inputs.rust-overlay.overlays.default
-  ];
+  nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ];
 
   environment.systemPackages = with pkgs; [
     (rust-bin.fromRustupToolchainFile ../../modules/rust-toolchain.toml)
     lldb_16
-    taplo #toml formatter & lsp
+    taplo # toml formatter & lsp
     cargo-watch
     cargo-deb
     cargo-deny
@@ -27,6 +25,6 @@
     cargo-bloat
     cargo-unused-features
     bacon
-    evcxr #rust repl
+    evcxr # rust repl
   ];
 }

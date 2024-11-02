@@ -10,7 +10,7 @@
     nerd-font-patcher
     # nerdfonts
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     terminus_font
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];

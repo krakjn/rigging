@@ -7,9 +7,7 @@
   };
 
   # Include NixVim
-  imports = [
-    inputs.nixvim.nixosModules.nixvim
-  ];
+  imports = [ inputs.nixvim.nixosModules.nixvim ];
 
   programs.nixvim = {
     enable = true;
@@ -103,6 +101,11 @@
     keymaps = [
       # Telescope keymaps
       {
+        key = "<leader><space>";
+        action = ":Telescope find_files<CR>";
+        options.desc = "Find files with Telescope";
+      }
+      {
         key = "<leader>ff";
         action = ":Telescope find_files<CR>";
         options.desc = "Find files with Telescope";
@@ -157,7 +160,6 @@
         options.desc = "yazi file browse";
       }
 
-
       # Buffer navigation
       {
         key = "<S-h>";
@@ -207,7 +209,8 @@
       # Lazygit
       {
         key = "<leader>gg";
-        action = ":lua require('toggleterm.terminal').Terminal:new({ cmd = 'lazygit', direction = 'float' }):toggle()<CR>";
+        action =
+          ":lua require('toggleterm.terminal').Terminal:new({ cmd = 'lazygit', direction = 'float' }):toggle()<CR>";
         options.desc = "Lazygit with ToggleTerm";
       }
       {

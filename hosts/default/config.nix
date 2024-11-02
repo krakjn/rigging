@@ -1,10 +1,8 @@
 # Main default config
 
-{ config, pkgs, host, username, options, lib, inputs, system, ... }: 
-let
-  inherit (import ./variables.nix) keyboardLayout;
-in
-{
+{ config, pkgs, host, username, options, lib, inputs, system, ... }:
+let inherit (import ./variables.nix) keyboardLayout;
+in {
 
   # FIXME: this seems redundant
   local.hardware-clock.enable = false;
@@ -13,15 +11,9 @@ in
   xdg.portal = {
     enable = true;
     wlr.enable = false;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    configPackages = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal ];
   };
-
 
   # systemd.services.flatpak-repo = {
   #   path = [ pkgs.flatpak ];
@@ -29,7 +21,6 @@ in
   #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   #   '';
   # };
-
 
   # powerManagement = {
   #   enable = true;
@@ -85,12 +76,10 @@ in
   nix = {
     settings = {
       auto-optimise-store = true;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      experimental-features = [ "nix-command" "flakes" ];
       substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      trusted-public-keys =
+        [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     gc = {
       automatic = true;
@@ -106,7 +95,6 @@ in
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
-
 
   console.keyMap = "${keyboardLayout}";
 

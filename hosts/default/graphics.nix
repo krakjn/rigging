@@ -8,9 +8,7 @@
   ];
 
   # OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
+  hardware.graphics = { enable = true; };
 
   # Extra Module Options
   drivers.amdgpu.enable = true;
