@@ -89,7 +89,7 @@ in {
   };
 
   # Virtualization / Containers
-  virtualisation.libvirtd.enable = false;
+  virtualisation.libvirtd.enable = true;
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;

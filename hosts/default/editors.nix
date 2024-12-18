@@ -15,6 +15,10 @@
     colorschemes.gruvbox.enable = true;
 
     plugins = {
+      # completions
+      cmp.enable = true;
+      cmp-nvim-lsp.enable = true;
+
       # Please explicitly define `plugins.web-devicons.enable` or alternatively
       # enable `plugins.mini.enable` with `plugins.mini.modules.icons` and `plugins.mini.mockDevIcons`.
       web-devicons.enable = true;
@@ -63,35 +67,46 @@
       };
     };
 
-    # extraPlugins = [
-    #   (pkgs.vimUtils.buildVimPlugin {
-    #     name = "nil-lsp";
-    #     src = pkgs.fetchFromGitHub {
-    #       owner = "oxalica";
-    #       repo = "nil";
-    #       rev = "70df371289962554cf7a23ed595b23a2ce271960";  # Specific commit
-    #       hash = "sha256-xrDJXLeEr8+/N/BmUnPxMP/AxHbIgOhnUqt34wtpOhY=";  # Prefetched NAR hash for this commit
-    #     };
-    #   })
-    # ];
+    extraConfigLua = ''
+      local cmp = require'cmp'
+      local luasnip = require'luasnip'
 
-    # extraConfig = ''
-    #   -- Function to toggle a floating terminal
-    #   function _G.toggle_terminal()
-    #     -- Check if the terminal buffer already exists
-    #     if vim.fn.bufexists("terminal") == 0 then
-    #       -- Create a new terminal split window
-    #       vim.api.nvim_command('split term://bash')
-    #     else
-    #       -- Close the terminal window
-    #       vim.api.nvim_command('hide')
-    #     end
-    #   end
-    #
-    #   -- Map Ctrl+/ to the toggle terminal function
-    #   vim.api.nvim_set_keymap('n', '<C-/>', ':lua toggle_terminal()<CR>', { noremap = true, silent = true })
-    #   vim.api.nvim_set_keymap('t', '<C-/>', '<C-\\><C-n>:lua toggle_terminal()<CR>', { noremap = true, silent = true })
-    # '';
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = {
+          ['<C-Space>'] = cmp.mapping.complete(), -- Trigger autocomplete with Ctrl+Space
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Confirm the selection with Enter
+          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['j'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ['k'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        },
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+        },
+	window = {
+          documentation = cmp.config.window.bordered({ 
+	    max_width = 50,
+	    max_height = 30,
+	  }),
+	  completion = cmp.config.window.bordered({ 
+	    max_width = 70,
+	    max_height = 100,
+	  }),
+        },
+      })
+
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+      require('lspconfig').rust_analyzer.setup {
+        capabilities = capabilities,
+      }
+    '';
 
     opts = {
       number = true; # Show line numbers

@@ -18,20 +18,19 @@ in {
         tdesktop
         (vscode-with-extensions.override {
           vscode = vscodium;
-          vscodeExtensions = with vscode-extensions;
-            [
-              asvetliakov.vscode-neovim
-              bbenoist.nix
-              ms-python.python
-              rust-lang.rust-analyzer
-              ms-azuretools.vscode-docker
-            ];
-	    # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-	    #          name = "everforest";
-	    #          publisher = "sainnhe";
-	    #          version = "0.3.0";
-	    #          sha256 = "9d98abcd5bccd7ad194e904b4e298bd97df9b081b2e63d8b40ea24edad9873b5";
-	    #        }];
+          vscodeExtensions = with vscode-extensions; [
+            asvetliakov.vscode-neovim
+            bbenoist.nix
+            ms-python.python
+            rust-lang.rust-analyzer
+            ms-azuretools.vscode-docker
+          ];
+          # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+          #          name = "everforest";
+          #          publisher = "sainnhe";
+          #          version = "0.3.0";
+          #          sha256 = "9d98abcd5bccd7ad194e904b4e298bd97df9b081b2e63d8b40ea24edad9873b5";
+          #        }];
         })
       ];
     };
@@ -59,7 +58,7 @@ in {
                         HISTSIZE=10000;
                         SAVEHIST=10000;
                         setopt appendhistory;
-        		bindkey -v
+        		bindkey -e
                 	eval "$(starship init zsh)"
                 	eval "$(zoxide init zsh)"
       '';
