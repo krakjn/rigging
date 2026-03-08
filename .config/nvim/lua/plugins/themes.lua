@@ -4,89 +4,81 @@
 -- * add extra plugins
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
-
+--
+--
 return {
-	-- add gruvbox
-	{ "ellisonleao/gruvbox.nvim" },
-	-- everforest
-	{
-		"neanias/everforest-nvim",
-		config = function()
-			require("everforest").setup({
-				---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
-				---Default is "medium".
-				background = "hard",
-				---How much of the background should be transparent. 2 will have more UI
-				---components be transparent (e.g. status line background)
-				transparent_background_level = 1,
-				---Whether italics should be used for keywords and more.
-				italics = false,
-				---Disable italic fonts for comments. Comments are in italics by default, set
-				---this to `true` to make them _not_ italic!
-				disable_italic_comments = false,
-				---By default, the colour of the sign column background is the same as the as normal text
-				---background, but you can use a grey background by setting this to `"grey"`.
-				sign_column_background = "none",
-				---The contrast of line numbers, indent lines, etc. Options are `"high"` or
-				---`"low"` (default).
-				ui_contrast = "low",
-				---Dim inactive windows. Only works in Neovim. Can look a bit weird with Telescope.
-				---
-				---When this option is used in conjunction with show_eob set to `false`, the
-				---end of the buffer will only be hidden inside the active window. Inside
-				---inactive windows, the end of buffer filler characters will be visible in
-				---dimmed symbols. This is due to the way Vim and Neovim handle `EndOfBuffer`.
-				dim_inactive_windows = false,
-				---Some plugins support highlighting error/warning/info/hint texts, by
-				---default these texts are only underlined, but you can use this option to
-				---also highlight the background of them.
-				diagnostic_text_highlight = false,
-				---Which colour the diagnostic text should be. Options are `"grey"` or `"coloured"` (default)
-				diagnostic_virtual_text = "coloured",
-				---Some plugins support highlighting error/warning/info/hint lines, but this
-				---feature is disabled by default in this colour scheme.
-				diagnostic_line_highlight = false,
-				---By default, this color scheme won't colour the foreground of |spell|, instead
-				---colored under curls will be used. If you also want to colour the foreground,
-				---set this option to `true`.
-				spell_foreground = false,
-				---Whether to show the EndOfBuffer highlight.
-				show_eob = true,
-				---Style used to make floating windows stand out from other windows. `"bright"`
-				---makes the background of these windows lighter than |hl-Normal|, whereas
-				---`"dim"` makes it darker.
-				---
-				---Floating windows include for instance diagnostic pop-ups, scrollable
-				---documentation windows from completion engines, overlay windows from
-				---installers, etc.
-				---
-				---NB: This is only significant for dark backgrounds as the light palettes
-				---have the same colour for both values in the switch.
-				float_style = "bright",
-				---Inlay hints are special markers that are displayed inline with the code to
-				---provide you with additional information. You can use this option to customize
-				---the background color of inlay hints.
-				---
-				---Options are `"none"` or `"dimmed"`.
-				inlay_hints_background = "none",
-				---You can override specific highlights to use other groups or a hex colour.
-				---This function will be called with the highlights and colour palette tables.
-				---@param highlight_groups Highlights
-				---@param palette Palette
-				on_highlights = function(highlight_groups, palette) end,
-				---You can override colours in the palette to use different hex colours.
-				---This function will be called once the base and background colours have
-				---been mixed on the palette.
-				---@param palette Palette
-				colours_override = function(palette) end,
-			})
-		end,
-	},
+  -- Disable dynamic base16 theme overrides from danklinux/matugen.
+  { "RRethy/base16-nvim", enabled = false },
+  {
+    "neanias/everforest-nvim",
+    config = function()
+      require("everforest").setup({
+        background = "hard",
+        transparent_background_level = 0,
+        ui_contrast = "high",
+        show_eob = true,
+        float_style = "bright",
+        ---@param palette Everforest.Palette
+        colours_override = function(palette)
+          local black = "#000000"
+          -- Keep only the core canvas dark; leave accent/utility backgrounds intact
+          -- so visual/search/diagnostic highlights preserve contrast.
+          palette.bg_dim = black
+          palette.bg0 = black
+          palette.bg1 = black
+        end,
+      })
+    end,
+  },
+  {
+    "LazyVim/LazyVim",
+    opts = function(_, opts)
+      opts.colorscheme = "everforest"
 
-	{
-		"LazyVim/LazyVim",
-		opts = {
-			colorscheme = "everforest",
-		},
-	},
+      -- Stop an already-running matugen watcher from previous config loads.
+      if _G._matugen_theme_watcher then
+        pcall(_G._matugen_theme_watcher.stop, _G._matugen_theme_watcher)
+        pcall(_G._matugen_theme_watcher.close, _G._matugen_theme_watcher)
+        _G._matugen_theme_watcher = nil
+      end
+
+      local function force_black_background()
+        local black = "#000000"
+
+        local groups = { "Normal", "NormalNC", "SignColumn", "EndOfBuffer" }
+
+        for _, group in ipairs(groups) do
+          local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group, link = false })
+          if ok then
+            hl.bg = black
+            pcall(vim.api.nvim_set_hl, 0, group, hl)
+          end
+        end
+      end
+
+      local augroup = vim.api.nvim_create_augroup("force_pure_black_bg", { clear = true })
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = augroup,
+        callback = function()
+          if vim.g.colors_name ~= "everforest" then
+            vim.schedule(function()
+              vim.cmd.colorscheme("everforest")
+            end)
+            return
+          end
+          force_black_background()
+        end,
+      })
+
+      -- Ensure this applies on startup and after theme plugin loads.
+      vim.schedule(function()
+        if vim.g.colors_name ~= "everforest" then
+          vim.cmd.colorscheme("everforest")
+        end
+        force_black_background()
+      end)
+
+      return opts
+    end,
+  },
 }
